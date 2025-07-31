@@ -36,7 +36,7 @@ class UserActionResponse(BaseModel):
     message: str
 
 
-# User Schemas
+# Fitness Class Schemas
 class FitnessClassBase(BaseModel):
     name: str
     description: str = Field(default="")
@@ -74,4 +74,29 @@ class FitnessClassActionResponse(BaseModel):
     """Schema for fitness class action response."""
 
     fitness_class_id: str
+    message: str
+
+
+# Booking Schemas
+class BookingCreate(BaseModel):
+    user_id: str
+    class_id: str
+
+
+class BookingCreate(FitnessClassBase):
+    """Schema for creating a booking."""
+    pass
+
+
+class BookingResponse(FitnessClassBase):
+    """Schema for booking response."""
+
+    id: str
+    model_config = {"from_attributes": True}
+
+
+class BookingActionResponse(BaseModel):
+    """Schema for booking action response."""
+
+    booking_id: str
     message: str

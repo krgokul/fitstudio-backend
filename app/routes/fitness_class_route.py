@@ -1,5 +1,5 @@
 from typing import List
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, Query, status
 from sqlalchemy.orm import Session
 from app import schemas, database
 from app.services import fitness_class_service
@@ -34,9 +34,14 @@ def get_fitness_class(fitness_class_id: str, db: Session = Depends(database.get_
     status_code=status.HTTP_200_OK,
 )
 def get_fitness_classs(
-    page: int = 1, limit: int = 10, db: Session = Depends(database.get_db)
+    timezone: str = Query("Asia/Kolkata"),
+    page: int = 1,
+    limit: int = 10,
+    db: Session = Depends(database.get_db),
 ):
-    return fitness_class_service.get_fitness_classes(db, page=page, limit=limit)
+    return fitness_class_service.get_fitness_classes(
+        db, page=page, limit=limit, timezone=timezone
+    )
 
 
 @router.put(

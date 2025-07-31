@@ -44,3 +44,10 @@ class Booking(Base):
     user_id = Column(String, ForeignKey("users.id"), nullable=False)
     class_id = Column(String, ForeignKey("fitness_classes.id"), nullable=False)
     booked_at = Column(Date, nullable=False)
+
+    user = relationship("User")
+    fitness_class = relationship("FitnessClass")
+
+    __table_args__ = (
+        UniqueConstraint("user_id", "class_id", name="uix_user_class_booking"),
+    )

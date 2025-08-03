@@ -78,20 +78,24 @@ class FitnessClassActionResponse(BaseModel):
 
 
 # Booking Schemas
-class BookingCreate(BaseModel):
+class BookingBase(BaseModel):
     user_id: str
     class_id: str
 
 
-class BookingCreate(FitnessClassBase):
+class BookingCreate(BookingBase):
     """Schema for creating a booking."""
+
     pass
 
 
-class BookingResponse(FitnessClassBase):
+class BookingResponse(BaseModel):
     """Schema for booking response."""
 
     id: str
+    user: UserResponse
+    fitness_class: FitnessClassResponse
+    booked_at: date
     model_config = {"from_attributes": True}
 
 
